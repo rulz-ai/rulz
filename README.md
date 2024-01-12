@@ -1,11 +1,12 @@
 # PandoraNext 
 
 > [!IMPORTANT]
-> ✨ 一个新的 [文档站](https://docs.pandoranext.com)，从部署到常见问题，甚至接口调用都有详细说明。
+> ✨ There is a new [documentation site](https://docs.pandoranext.com)，available, which provides detailed explanations on deployment, common issues, and even API calls.
+>  
+> ✨ Now we can [register a ChatGPT account](https://zhile.io/2023/12/09/pandoranext-introduction.html) using PandoraNext, with no restrictions and full proxy support!
 > 
-> ✨ 现在我们可以使用PandoraNext [注册ChatGPT账号](https://zhile.io/2023/12/09/pandoranext-introduction.html)了，无墙，全代理！
-> 
-> ✨ [PandoraNext助手GPTs](https://chat.oaifree.com/g/g-CFsXuTRfy-pandoranextzhu-shou)，如你有Plus账号，可向它求助项目问题（不要试图套源码）
+> ✨ [ PandoraNext Assistant GPTs](https://chat.oaifree.com/g/g-CFsXuTRfy-pandoranextzhu-shou)，are available to help with project-related questions if you have a Plus account (please refrain from attempting to extract source code).
+
 
 ## 简单介绍
 
