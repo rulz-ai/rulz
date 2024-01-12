@@ -213,13 +213,13 @@ server {
 * Now you can log in directly with built-in username and password. This method must set `password` and `shared` cannot be `true`.
 * The format of the built-in account password is: `email, password`, which is consumed by the `0` quota.
 
-## proxy模式接口
-* 页面 /auth 使用账号密码，手动获取`access token`和`session token`。只是给UI方便获取，`1:100`的消耗依然存在。
-* 页面 /fk 使用`access token`或`session token`，手动获取`share token`，
-* 页面 /pk 使用`share token`，手动组`pool token`。
-* /backend-api/* `ChatGPT`网页版接口，具体F12去页面上看。
-* /public-api/* `ChatGPT`网页版接口，具体F12去页面上看。
-* /v1/* 所有`https://api.openai.com/v1/*`开头的接口，每次调用`1:1`。
+## proxy mode interface
+* Page /auth uses the account password to manually obtain `access token` and `session token`. It is just for easy access through the UI, and the consumption of `1:100` still exists.
+* Page /fk uses `access token` or `session token` to obtain `share token` manually,
+* Page /pk uses `share token` and manually group `pool token`.
+* /backend-api/* `ChatGPT` web version interface, F12 to see the page for details.
+* /public-api/* `ChatGPT` web version interface, F12 to see the page.
+* /v1/* All interfaces starting with `https://api.openai.com/v1/*`, each call `1:1`.
 * /dashboard/* 所有`https://api.openai.com/dashboard/*`开头的接口，每次调用`1:1`。
 * **GET** /api/token/info/fk-xxx 获取share token信息，使用生成人的access token做为Authorization头，可查看各模型用量。
 * **POST** /api/auth/session 通过session token获取access token，使用urlencode form传递session_token参数。
