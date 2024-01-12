@@ -56,10 +56,10 @@ $ docker run -d --restart always --name PandoraNext --net=bridge \
 ```
 
 * The container listens to the `8181` port by default and maps the host's `8181` port, which can be modified by yourself.
-* 你可以映射目录到容器内的`/data`目录，`config.json`、`tokens.json`和[获取license_id](#%E5%85%B3%E4%BA%8E-license_id)填写在`config.json`中。
-* 你可以映射目录到容器内的`/root/.cache/PandoraNext`目录，保留登录的`session`，避免重启容器登录状态丢失。
+* You can map the directory to the `/data` directory in the container, fill in `config.json`, `tokens.json` and [Get license_id](#%E5%85%B3%E4%BA%8E-license_id) `config.json`.
+* You can map the directory to the `/root/.cache/PandoraNext` directory in the container and retain the login `session` to avoid losing the login status when restarting the container.
 
-## Nginx 配置
+## Nginx Configuration
 
 ```
 server {
@@ -71,7 +71,7 @@ server {
 	ssl_certificate      certs/chat.zhile.io.crt;
 	ssl_certificate_key  certs/chat.zhile.io.key;
 
-	...省略若干其他配置...
+	...Omit some other configuration...
 	
 	location / {
 		proxy_http_version 	1.1;
@@ -91,17 +91,17 @@ server {
 		proxy_read_timeout 600;
 	}
 
-	...省略若干其他配置...
+	...Omit some other configuration...
 }
 ```
 
-* Nginx建议开启`http2`。
-* 以上仅为推荐配置，可根据具体情况进行改动。
-* 建议开启`ssl`也即`https`，否则浏览器限制将无法复制网页内容。
+* Nginx recommends enabling `http2`.
+* The above configurations are only recommended configurations and can be changed according to specific circumstances.
+* It is recommended to enable `ssl`, also known as `https`, otherwise browser restrictions will prevent you from copying web page content.
 
-## config 配置
+## config configuration
 
-* 以下是一个示例`config.json`文件
+* The following is a sample `config.json` file
 
 ```json
 {
@@ -138,48 +138,48 @@ server {
 }
 ```
 
-* `bind`指定绑定IP和端口，在docker内，IP只能用`0.0.0.0`，否则映射不出来。
-* **如果你不打算套nginx等反代，`bind`参数的IP请使用`0.0.0.0`！！！**
-* `tls`配置PandoraNext直接以`https`启动。
-    * `enabled` 是否启用，`true`或`false`。启用时必须配置证书和密钥文件路径。
-    * `cert_file` 证书文件路径。
-    * `key_file` 密钥文件路径。
-* `timeout`是请求的超时时间，单位为`秒`。
-* `proxy_url`指定部署服务流量走代理，如：`http://127.0.0.1:8888`、`socks5://127.0.0.1:7980`
-* `license_id`指定你的License Id，可以在[这里获取](#%E5%85%B3%E4%BA%8E-license_id)。
-* `public_share`对于GPT中创建的对话分享，是否需要登录才能查看。为`true`则无需登录即可查看。
-* `site_password`设置整站密码，需要先输入这个密码，正确才能进行后续步骤。充分保障私密性。不少于`8`位，且同时包含`数字`和`字母`！
-* `setup_password`定义一个设置密码，用于调用`/setup/`开头的设置接口，为空则不可调用。不少于`8`位，且同时包含`数字`和`字母`！
-* `server_tokens`设置是否在响应头中显示版本号，`true`显示，`false`则不显示。
-* `proxy_api_prefix`可以给你的`proxy`模式接口地址添加前缀，让人意想不到。注意设置的字符应该是url中允许的字符。包括：`a-z` `A-Z` `0-9` `-` `_` `.` `~`
-* `proxy_api_prefix` 你必须设置一个不少于`8`位，且同时包含`数字`和`字母`的前缀才能开启`proxy`模式！
-    * `/backend-api/conversation` proxy模式比例 `1:4`
-    * `/v1/chat/completions` 3.5模型比例 `1:4`
-    * `/v1/chat/completions` 4模型比例 `1:10`, 无需打码
-    * `/api/auth/login` 登录接口比例 `1:100`，无需打码
-    * `/api/auth/login2` 获取`refresh_token`接口比例 `1:1000`，无需打码
-    * `/api/arkose/token` 获取`arkose_token`，比例 `1:10`
-    * `/api/auth/platform/login` 登录platform接口比例 `1:100`，无需打码
-* `isolated_conv_title`现在隔离会话可以设置标题了，而不再是千篇一律的`*`号。
-* `disable_signup` 禁用注册账号功能，`true`或`false`。
-* `auto_conv_arkose` 在`proxy`模式使用`gpt-4`模型调用`/backend-api/conversation`接口是否自动打码，使用消耗为`4+10`。
-* `proxy_file_service` 在`proxy`模式是否使用PandoraNext的文件代理服务，避免官方文件服务的墙。
-* `custom_doh_host` 配置自定义的`DoH`主机名，建议使用IP形式。默认启动时在公共`DoH`中挑选你所在地区最快的那个。
-* `captcha`配置一些关键页面的验证码。
-    * `provider`验证码提供商，支持：`recaptcha_v2`、`recaptcha_enterprise`、`hcaptcha`、`turnstile`、`friendly_captcha`。
-    * `site_key`验证码供应商后台获取的网站参数，是可以公布的信息。
-    * `site_secret`验证码供应商后台获取的秘密参数，不要公布出来。有些供应商也称作`API Key`。
-    * `site_login`是否在全站密码登录界面显示验证码，`true`或`false`。
-    * `setup_login`是否在设置入口登录界面显示验证码，`true`或`false`。
-    * `oai_username`是否输入用户名界面显示验证码，`true`或`false`。
-    * `oai_password`是否在输入登录密码界面显示验证码，`true`或`false`。
-* `whitelist`邮箱数组指定哪些用户可以登录使用，用户名/密码登录受限制，各种Token登录受限。内置tokens不受限。
-* `whitelist`为`null`则不限制，为空数组`[]`则限制所有账号，内置tokens不受限。
-* 一个`whitelist`的例子：```"whitelist": ["mail2@test.com", "mail2@test.com"]```
+* `bind` specifies the binding IP and port. In docker, the IP can only use `0.0.0.0`, otherwise it cannot be mapped.
+* **If you do not plan to use nginx or other reverse generation, please use `0.0.0.0` for the IP of the `bind` parameter! ! ! **
+* `tls` configures PandoraNext to start directly with `https`.
+    * `enabled` Whether it is enabled, `true` or `false`. Certificate and key file paths must be configured when enabled.
+    * `cert_file` Certificate file path.
+    * `key_file` Key file path.
+* `timeout` is the request timeout, in seconds.
+* `proxy_url` specifies the deployment service traffic to go through the proxy, such as: `http://127.0.0.1:8888`, `socks5://127.0.0.1:7980`
+* `license_id` specifies your License Id, which can be obtained [here](#%E5%85%B3%E4%BA%8E-license_id).
+* `public_share` For conversation sharing created in GPT, whether you need to log in to view it. If it is `true`, you can view it without logging in.
+* `site_password` sets the password for the entire site. You need to enter this password first and make sure it is correct before you can proceed with the subsequent steps. Privacy is fully guaranteed. It must be no less than 8 digits and contain both numbers and letters!
+* `setup_password` defines a setup password, which is used to call the setup interface starting with `/setup/`. If it is empty, it cannot be called. It must be no less than 8 digits and contain both numbers and letters!
+* `server_tokens` sets whether to display the version number in the response header, `true` displays it, `false` does not display it.
+* `proxy_api_prefix` can add a prefix to your `proxy` mode interface address, which is unexpected. Note that the characters set should be the characters allowed in the URL. Includes: `a-z` `A-Z` `0-9` `-` `_` `.` `~`
+* `proxy_api_prefix` You must set a prefix that is no less than `8` and contains both `numbers` and `letters` to enable `proxy` mode!
+    * `/backend-api/conversation` proxy mode ratio `1:4`
+    * `/v1/chat/completions` 3.5 model scale `1:4`
+    * `/v1/chat/completions` 4 model scale `1:10`, no coding required
+    * `/api/auth/login` login interface ratio `1:100`, no coding required
+    * `/api/auth/login2` obtains the `refresh_token` interface ratio `1:1000`, no coding required
+    * `/api/arkose/token` gets `arkose_token`, ratio `1:10`
+    * `/api/auth/platform/login` login platform interface ratio `1:100`, no coding required
+* `isolated_conv_title` can now set the title of the isolated session, instead of the same `*` sign.
+* `disable_signup` disables the account registration function, `true` or `false`.
+* `auto_conv_arkose` in `proxy` mode uses the `gpt-4` model to call the `/backend-api/conversation` interface whether to automatically code, and the usage cost is `4+10`.
+* `proxy_file_service` Whether to use PandoraNext's file proxy service in `proxy` mode to avoid the official file service wall.
+* `custom_doh_host` configures a customized `DoH` host name. It is recommended to use the IP form. By default on startup pick the fastest one in your region among the public `DoH`s.
+* `captcha` configures verification codes for some key pages.
+    * `provider` verification code provider, supports: `recaptcha_v2`, `recaptcha_enterprise`, `hcaptcha`, `turnstile`, `friendly_captcha`.
+    * The website parameters obtained by the `site_key` verification code provider background are information that can be published.
+    * `site_secret` is a secret parameter obtained by the verification code provider's background. Do not publish it. Some vendors also call it `API Key`.
+    * Whether `site_login` displays the verification code in the full-site password login interface, `true` or `false`.
+    * Whether `setup_login` displays the verification code on the setup portal login interface, `true` or `false`.
+    * Whether `oai_username` displays the verification code when entering the username interface, `true` or `false`.
+    * Whether `oai_password` displays the verification code on the login password input interface, `true` or `false`.
+* The `whitelist` mailbox array specifies which users can log in and use, username/password login is restricted, and various Token logins are restricted. Built-in tokens are unlimited.
+* If `whitelist` is `null`, there will be no restriction. If it is an empty array `[]`, all accounts will be restricted. Built-in tokens will not be restricted.
+* An example of `whitelist`:```"whitelist": ["mail2@test.com", "mail2@test.com"]```
 
-## tokens 配置
+## tokens configuration
 
-* 以下是一个示例`tokens.json`文件
+* The following is a sample `tokens.json` file
 
 ```json
 {
@@ -201,16 +201,17 @@ server {
 }
 ```
 
-* `token`支持示例文件中所写的所有类型。`session token`和`refresh token`可自动刷新。
-* 每个key被称为`token key`，可在登录框作用户名输入。如上：`test-1`、`test-2`等，随意更改。
-* 如果设置了`password`则输入完`token key`进入输入密码页面输入匹配。
-* 如果设置`shared`为`true`，则这个账号会出现在`/shared.html`中，登录页面会出现它的链接。
+* `token` supports all types written in the example file. `session token` and `refresh token` can be refreshed automatically.
+* Each key is called a `token key` and can be entered as a username in the login box. As above: `test-1`, `test-2`, etc., feel free to change them.
+* If `password` is set, enter the `token key` and enter the password input page to enter the match.
+* If `shared` is set to `true`, this account will appear in `/shared.html`, and its link will appear on the login page
 * 如果设置`shared`为`true`，则这个账号不能再在用户名登录框进行登录。
-* `/shared.html`中的账号和共享站功能相同，可以自行设置隔离密码进行会话隔离。
-* `plus`用来标识`/shared.html`上账号是否有金光，没有其他作用。
-* `show_user_info`表示`/shared.html`共享时是否显示账号邮箱信息，GPTs建议开启。
-* 现在可以直接内置用户名密码登录，此种方法必须设置`password`且`shared`不可为`true`。
-* 内置账号密码的格式为：`邮箱,密码`，此种是`0`额度消耗的。
+* If `shared` is set to `true`, this account can no longer be logged in in the username login box.
+* The account in `/shared.html` has the same functions as the shared station. You can set your own isolation password for session isolation.
+* `plus` is used to identify whether the account on `/shared.html` has golden light, and has no other function.
+* `show_user_info` indicates whether to display account email information when sharing `/shared.html`. GPTs is recommended to be turned on.
+* Now you can log in directly with built-in username and password. This method must set `password` and `shared` cannot be `true`.
+* The format of the built-in account password is: `email, password`, which is consumed by the `0` quota.
 
 ## proxy模式接口
 * 页面 /auth 使用账号密码，手动获取`access token`和`session token`。只是给UI方便获取，`1:100`的消耗依然存在。
