@@ -8,43 +8,43 @@
 > ✨ [ PandoraNext Assistant GPTs](https://chat.oaifree.com/g/g-CFsXuTRfy-pandoranextzhu-shou)，are available to help with project-related questions if you have a Plus account (please refrain from attempting to extract source code).
 
 
-## 简单介绍
+## A Brief Introdction
 
 * Pandora Cloud + Pandora Server + Shared Chat + BackendAPI Proxy + Chat2API = `PandoraNext`（[演示站](https://chat.oaifree.com)）
-* 更强大，但还是那个让你呼吸顺畅的ChatGPT。支持GPTs，最新UI。
-* 支持多种登录方式：（相当于Pandora Cloud）
-  * 账号/密码
+* ore powerful, but still the same ChatGPT that makes you breathe easier. Support GPTs, latest UI.
+* Supports multiple login methods: (equivalent to Pandora Cloud)
+  * Account Password
   * Access Token
   * Session Token
   * Refresh Token
   * Share Token
-* 可内置tokens（可使用上述所有Token），支持设置密码。（相当于Pandora Server）
-* 可配置共享的tokens，会有一个功能等同[chat-shared3.zhile.io](https://chat-shared3.zhile.io)的共享站（目前1841个普号、6个Plus）。
-* 为全代理模式（能想象到的都代理了），你的用户只需要跟你的部署网络能通即可。
-* 可启动为BackendAPI Proxy模式，直接使用`Access Token`调用`/backend-api/`和chat2api的接口。
-* 还有疑问，那就进Telegram群让大家围观围观：[@ja_netfilter_group](https://t.me/ja_netfilter_group)
+* Can have built-in tokens (all the above Tokens can be used) and supports setting passwords. (Equivalent to Pandora Server)
+* Shared tokens can be configured, and there will be a sharing station with functions equivalent to [chat-shared3.zhile.io](https://chat-shared3.zhile.io) (currently 1841 regular accounts, 6 Plus).
+* For full proxy mode (everything imaginable is proxied), your users only need to be able to communicate with your deployment network.
+* It can be started in BackendAPI Proxy mode and directly use `Access Token` to call the interfaces of `/backend-api/` and chat2api.
+* If you still have questions, join the Telegram group and let everyone watch: [@ja_netfilter_group](https://t.me/ja_netfilter_group)
 
 <details>
 <summary>
 	
-    旧的、简易的文档。更新、更详细的访问文档站。
+    Old, simple documentation. For updated and more detailed access to the documentation site.
 </summary>
 	
-## 手动部署
+## Manual Deployment
 
-* 在[Releases](https://github.com/pandora-next/deploy/releases)中下载对应操作系统和架构的包。
-* 解压后修改同目录中的`config.json`至你需要的参数。
-* [获取license_id](#%E5%85%B3%E4%BA%8E-license_id)填写在`config.json`中，这是必须的前置步骤！
-* 各种Linux/Unix系统使用`./PandoraNext`启动即可。
-* Windows系统双击`PandoraNext.exe`即可，当然最好在cmd中启动。
+* Download the package corresponding to the operating system and architecture in [Releases](https://github.com/pandora-next/deploy/releases).
+* After unzipping, modify `config.json` in the same directory to the parameters you need.
+* [Get license_id](#%E5%85%B3%E4%BA%8E-license_id) is filled in `config.json`. This is a necessary pre-step!
+* Various Linux/Unix systems can be started using `./PandoraNext`.
+* On Windows systems, just double-click `PandoraNext.exe`. Of course, it is best to start it in cmd.
 
-## Docker Compose 部署
+## Docker Compose Deploy
 
-* 仓库内已包含相关文件和目录，拉到本地，[获取license_id](#%E5%85%B3%E4%BA%8E-license_id)填写在`data/config.json`中。
-* `data`目录中包含`config.json`、`tokens.json`示例文件可自行修改。
-* `docker compose up -d` **原神启动！**
-
-## Docker 部署
+* The warehouse already contains relevant files and directories, pull them locally, and fill in [Get license_id](#%E5%85%B3%E4%BA%8E-license_id) in `data/config.json`.
+* The `data` directory contains `config.json` and `tokens.json` sample files that can be modified by yourself.
+* `docker compose up -d` **Genshin Impact starts! **
+ 
+## Docker Deploy
 
 ```bash
 $ docker pull pengzhile/pandora-next
@@ -55,7 +55,7 @@ $ docker run -d --restart always --name PandoraNext --net=bridge \
     pengzhile/pandora-next
 ```
 
-* 容器内默认监听`8181`端口，映射宿主机的`8181`端口，可自行修改。
+* The container listens to the `8181` port by default and maps the host's `8181` port, which can be modified by yourself.
 * 你可以映射目录到容器内的`/data`目录，`config.json`、`tokens.json`和[获取license_id](#%E5%85%B3%E4%BA%8E-license_id)填写在`config.json`中。
 * 你可以映射目录到容器内的`/root/.cache/PandoraNext`目录，保留登录的`session`，避免重启容器登录状态丢失。
 
