@@ -220,55 +220,55 @@ server {
 * /backend-api/* `ChatGPT` web version interface, F12 to see the page for details.
 * /public-api/* `ChatGPT` web version interface, F12 to see the page.
 * /v1/* All interfaces starting with `https://api.openai.com/v1/*`, each call `1:1`.
-* /dashboard/* 所有`https://api.openai.com/dashboard/*`开头的接口，每次调用`1:1`。
-* **GET** /api/token/info/fk-xxx 获取share token信息，使用生成人的access token做为Authorization头，可查看各模型用量。
-* **POST** /api/auth/session 通过session token获取access token，使用urlencode form传递session_token参数。
-* **POST** /api/auth/refresh 通过refresh token获取access token，使用urlencode form传递refresh_token参数。
-* **POST** /api/auth/login 登录获取access token，使用urlencode form传递username 和 password 参数。
-* **POST** /api/auth/login2 登录获取refresh token，使用urlencode form传递username、password 和 mfa_code 参数。
-* **POST** /api/token/register 生成share token
-* **POST** /api/pool/update 生成更新pool token
-* **POST** /v1/chat/completions 使用`ChatGPT`模拟`API`的请求接口，支持share token和pool token。
-* **POST** /api/arkose/token 获取arkose_token，目前只支持`gpt-4`类型。使用urlencode form传递type=gpt-4参数。获取后可API方式调用`GPTs`
-* **POST** /api/setup/reload 重载当前服务的`config.json`、`tokens.json`等配置。
-* **POST** /api/auth/platform/refresh 通过`platform`的refresh token获取access token，使用urlencode form传递refresh_token参数。
-* **POST** /api/auth/platform/login 登录`platform`获取access token，使用urlencode form传递username 和 password 参数。如果要获取`sess key`，增加参数`prompt=login`。
-* 以上地址均需在最前面增加 `/<proxy_api_prefix>`，也就是你设置的前缀。
+* /dashboard/* All interfaces starting with `https://api.openai.com/dashboard/*`, calling `1:1` each time.
+* **GET** /api/token/info/fk-xxx Gets the share token information and uses the generator's access token as the Authorization header to view the usage of each model.
+* **POST** /api/auth/session Obtain the access token through the session token and use the urlencode form to pass the session_token parameter.
+* **POST** /api/auth/refresh Obtain access token through refresh token and use urlencode form to pass refresh_token parameter.
+* **POST** /api/auth/login Log in to obtain the access token and use the urlencode form to pass the username and password parameters.
+* **POST** /api/auth/login2 Log in to obtain refresh token and use urlencode form to pass username, password and mfa_code parameters.
+* **POST** /api/token/register Generate share token
+* **POST** /api/pool/update Generate update pool token
+* **POST** /v1/chat/completions Use `ChatGPT` to simulate the request interface of `API`, supporting share token and pool token.
+* **POST** /api/arkose/token Get arkose_token, currently only supports `gpt-4` type. Use the urlencode form to pass the type=gpt-4 parameter. After obtaining it, you can call `GPTs` through API
+* **POST** /api/setup/reload Reload the `config.json`, `tokens.json` and other configurations of the current service.
+* **POST** /api/auth/platform/refresh Obtain the access token through the refresh token of `platform`, and use the urlencode form to pass the refresh_token parameter.
+* **POST** /api/auth/platform/login Log in to `platform` to obtain access token, and use urlencode form to pass username and password parameters. If you want to obtain `sess key`, add parameter `prompt=login`.
+* The above addresses need to add `/<proxy_api_prefix>` at the front, which is the prefix you set.
 
 
-## 设置界面
+## Set Interface
 
-* 必须先在`config.json`中设置`setup_password`为非空！
-* 浏览器打开：`<Base URL>/setup`，其中`<Base URL>`是你部署服务的地址。
+* You must first set `setup_password` to be non-empty in `config.json`!
+* Open the browser: `<Base URL>/setup`, where `<Base URL>` is the address of your deployment service.
 
-## 关于 license_id
+## About license_id
 
-* 在这里获取：[https://dash.pandoranext.com](https://dash.pandoranext.com)
-* 复制`License Id:`后的内容，填写在`config.json`的`license_id`字段。
-* 注意检查不要复制到多余的空格等不可见字符。
-* 如果`config.json`中没有填写`license_id`字段，启动会报错`License ID is required`。
-* **没有固定IP的情况**，IP变动后会自动尝试重新拉取。
-* 更换`License Id`之后，通常需要手动删除`license.jwt`再启动。
+* Get it here：[https://dash.pandoranext.com](https://dash.pandoranext.com)
+* Copy the content after `License Id:` and fill it in the `license_id` field of `config.json`.
+* Be careful not to copy unnecessary spaces and other invisible characters.
+* If the `license_id` field is not filled in `config.json`, an error `License ID is required` will be reported at startup.
+* **If there is no fixed IP**, it will automatically try to pull again after the IP changes.
+* After changing the `License Id`, you usually need to manually delete `license.jwt` and start again.
 
 </details>
 
-## 其他说明
+## other instructions
 
 > [!CAUTION]
-> * 如果你发现网页上不能复制，开启`https`或者使用`127.0.0.1`。
-> * 如果你正在自定义页面元素，请保留：
->   * `Powered by PandoraNext`文字和链接。
->   * `About PandoraNext`文字和链接。
-> * 如果要抹，请在**一百多个js**文件中去除若干`dom检测`代码。
-> * 抹了后果如何我不说。
-> * `PHP`是世界上最好的编程语言。
+> * If you find that copying is not possible on the web page, enable `https` or use `127.0.0.1`.
+> * If you are customizing page elements, keep:
+>   * `Powered by PandoraNext` Text and links.
+>   * `About PandoraNext` Text and links.
+> * If you want to erase it, please remove some `dom detection` codes from more than 100 js** files.
+> * I won’t tell you what the consequences will be if you wipe it off.
+> * `PHP` is the best programming language in the world.
 
-## 贡献者们
+## Contributors
 
-> 感谢所有让这个项目变得更好的贡献者们！
+> Thanks to all the contributors who make this project better!
 
 [![Contributors](https://contrib.rocks/image?repo=pandora-next/deploy)](https://github.com/pandora-next/deploy/graphs/contributors)
 
-## Star历史
+## SStar History
 
 ![Star History Chart](https://api.star-history.com/svg?repos=pandora-next/deploy&type=Date)
