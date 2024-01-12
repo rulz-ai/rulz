@@ -10,7 +10,7 @@
 
 ## A Brief Introdction
 
-* Pandora Cloud + Pandora Server + Shared Chat + BackendAPI Proxy + Chat2API = `PandoraNext`（[演示站](https://chat.oaifree.com)）
+* Pandora Cloud + Pandora Server + Shared Chat + BackendAPI Proxy + Chat2API = `PandoraNext`（Demo station](https://chat.oaifree.com)）
 * ore powerful, but still the same ChatGPT that makes you breathe easier. Support GPTs, latest UI.
 * Supports multiple login methods: (equivalent to Pandora Cloud)
   * Account Password
