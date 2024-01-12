@@ -269,6 +269,6 @@ server {
 
 [![Contributors](https://contrib.rocks/image?repo=pandora-next/deploy)](https://github.com/pandora-next/deploy/graphs/contributors)
 
-## SStar History
+## Star History
 
 ![Star History Chart](https://api.star-history.com/svg?repos=pandora-next/deploy&type=Date)
